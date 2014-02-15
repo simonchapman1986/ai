@@ -36,8 +36,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'apps.api',
+    #'south',
+    'django.contrib.admin',
+    'django_extensions',
+    'djcelery',
+    'kombu.transport.django',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -61,9 +65,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ai',
-        'USER': 'ai',
-        'PASSWORD': '',
-        'HOST': ''
+        'USER': 'ai_user',
+        'PASSWORD': '1234',
+        'HOST': 'localhost'
     }
 }
 

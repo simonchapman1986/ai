@@ -1,1 +1,1 @@
-from short_term_cache import *
+from short_term_cache import ShortTermCache
