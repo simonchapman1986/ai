@@ -6,6 +6,7 @@ from bson import json_util
 
 import datetime
 import json
+import cPickle
 
 
 class ShortTermCache(models.Model):
@@ -30,12 +31,19 @@ class ShortTermCache(models.Model):
         key = m.hexdigest()
 
         # build data into json store
-        if not isinstance(data, json):
-            data = {data}
+        if not isinstance(data, dict):
+            data = {'cache': data}
 
-        data = json.dumps(data, default=json_util.default)
+        #data = json.loads(data, object_hook=json_util.object_hook)
+        #data = json.dumps(data, default=json_util.default)
+        data = cPickle.dumps(data)
 
-        ShortTermCache.objects.get_or_create(
+
+        rec, created = ShortTermCache.objects.get_or_create(
             md5=key,
             data=data
         )
+
+        return rec.data, created
+
+
